@@ -63,7 +63,13 @@ def open_stations():
     """
     Returns a graph of stations that removes edges to closed stations
     """
-    # TODO 
+    # TODO : implement the psuodo code below
+    # create a copy of the stations graph
+    # for each station
+    #   if the station is closed
+    #       remove all of its edges
+    #   else
+    #       remove all closed stations from its edges
     pass
 
 
