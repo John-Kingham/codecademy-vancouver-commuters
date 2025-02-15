@@ -16,3 +16,9 @@ class TestSkyRoute(unittest.TestCase):
         end = landmark_choices["2"]
         short_route = ["TEST STATION 1", "TEST STATION 2"]
         self.assertEqual(shortest_route(start, end), short_route)
+
+    @unittest.skip("Waiting for closed-station functionality")
+    def test_no_route(self):
+        start = landmark_choices["1"]
+        end = landmark_choices["4"]
+        self.assertIsNone(shortest_route(start, end))

@@ -2,6 +2,7 @@ landmark_choices = {
     "1": "TEST LANDMARK 1",
     "2": "TEST LANDMARK 2",
     "3": "TEST LANDMARK 3",
+    "4": "TEST LANDMARK 4",
     "a": "Marine Building",
     "b": "Scotiabank Field at Nat Bailey Stadium",
     "c": "Vancouver Aquarium",
@@ -33,6 +34,7 @@ landmark_stations = {
     "TEST LANDMARK 1": ["TEST STATION 1"],
     "TEST LANDMARK 2": ["TEST STATION 2"],
     "TEST LANDMARK 3": ["TEST STATION 3"],
+    "TEST LANDMARK 4": ["TEST STATION 4"],
     "Marine Building": set(["Burrard", "Waterfront"]),
     "Scotiabank Field at Nat Bailey Stadium": set(["King Edward"]),
     "Vancouver Aquarium": set(["Burrard"]),
@@ -65,9 +67,10 @@ landmark_stations = {
     "Central Park": set(["Patterson", "Metrotown"]),
 }
 metro_stations = {
-    "TEST STATION 1": ["TEST STATION 3", "TEST STATION 2"],
+    "TEST STATION 1": ["TEST STATION 3", "TEST STATION 2", "TEST STATION 4"],
     "TEST STATION 2": ["TEST STATION 1", "TEST STATION 3"],
     "TEST STATION 3": ["TEST STATION 1", "TEST STATION 2"],
+    "TEST STATION 4": ["TEST STATION 1"],
     "Richmond-Brighouse": set(["Lansdowne"]),
     "Lansdowne": set(["Richmond-Brighouse", "Aberdeen"]),
     "Aberdeen": set(["Lansdowne", "Bridgeport"]),
@@ -124,3 +127,5 @@ metro_stations = {
     "Rupert": set(["Gilmore", "Renfrew"]),
     "Renfrew": set(["Rupert", "Commercial-Broadway"]),
 }
+
+closed_stations = set("TEST STATION 4")

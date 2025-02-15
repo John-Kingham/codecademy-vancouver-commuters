@@ -1,4 +1,5 @@
-from skyroute_database import landmark_choices, landmark_stations, metro_stations
+from skyroute_database import landmark_choices, landmark_stations
+from skyroute_database import metro_stations, closed_stations
 
 
 def shortest_route(start, end):
@@ -33,27 +34,37 @@ def shortest_route(start, end):
 
 def route_from(start, end):
     """
-    Returns any route if there is one.
+    Returns a route from start to end, if there is one.
 
     Parameters
     ----------
     start : str
-        The name of the start landmark
+        The name of the start landmark.
     end : str
-        The name of the end landmark
+        The name of the end landmark.
 
     Returns
     -------
     None
         If no route exists.
     list : (of strings)
-        The station names along the route.
+        The station names along a route from start to end.
     """
+    # build a new graph that excludes closed stations
+    active_stations = open_stations()
     for start_station in landmark_stations[start]:
         for end_station in landmark_stations[end]:
             route = dfs(metro_stations, start_station, end_station)
             if route:
                 return route
+
+
+def open_stations():
+    """
+    Returns a graph of stations that removes edges to closed stations
+    """
+    # TODO 
+    pass
 
 
 def dfs(graph, current_vertex, target_vertex, visited=None):
@@ -83,10 +94,3 @@ def bfs(graph, start_vertex, target_value):
                     return path + [neighbour]
                 else:
                     bfs_queue.append([neighbour, path + [neighbour]])
-
-
-a_route = route_from(landmark_choices["1"], landmark_choices["2"])
-short_route = shortest_route(landmark_choices["1"], landmark_choices["2"])
-print(a_route)
-print(short_route)
-
