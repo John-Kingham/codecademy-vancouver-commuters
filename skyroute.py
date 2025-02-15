@@ -20,60 +20,50 @@ def shortest_route(start, end):
     list : (of strings)
         Station names along the shortest route.
     """
-    if route_from(start, end):
-        routes = []
-        for start_station in landmark_stations[start]:
-            for end_station in landmark_stations[end]:
-                route = bfs(metro_stations, start_station, end_station)
-                if route:
-                    routes.append(route)
-        if routes:
-            print(f"routes[] = {routes}")
-            return min(routes, key=len)
+    stations_open = open_stations()
 
+    # check to see if any route exists. If not, exit.
 
-def route_from(start, end):
-    """
-    Returns a route from start to end, if there is one.
-
-    Parameters
-    ----------
-    start : str
-        The name of the start landmark.
-    end : str
-        The name of the end landmark.
-
-    Returns
-    -------
-    None
-        If no route exists.
-    list : (of strings)
-        The station names along a route from start to end.
-    """
-    # build a new graph that excludes closed stations
-    active_stations = open_stations()
+    any_route = None
     for start_station in landmark_stations[start]:
         for end_station in landmark_stations[end]:
-            route = dfs(metro_stations, start_station, end_station)
+            any_route = dfs(stations_open, start_station, end_station)
+            if any_route:
+                break
+        if any_route:
+            break
+    if not any_route:
+        return
+
+    # find and return the shortest route
+
+    routes = []
+    for start_station in landmark_stations[start]:
+        for end_station in landmark_stations[end]:
+            route = bfs(metro_stations, start_station, end_station)
             if route:
-                return route
+                routes.append(route)
+    if routes:
+        return min(routes, key=len)
 
 
 def open_stations():
     """
-    Returns a graph of stations that removes edges to closed stations
+    Returns a graph of stations with all edges to closed stations removed.
     """
-    # TODO : implement the psuodo code below
-    # create a copy of the stations graph
-    # for each station
-    #   if the station is closed
-    #       remove all of its edges
-    #   else
-    #       remove all closed stations from its edges
-    pass
+    temp_graph = metro_stations
+    for station in temp_graph:
+        if station in closed_stations:
+            temp_graph[station] = set()
+        else:
+            temp_graph[station] -= closed_stations
+    return temp_graph
 
 
 def dfs(graph, current_vertex, target_vertex, visited=None):
+    """
+    A depth-first search.
+    """
     if visited is None:
         visited = []
     visited.append(current_vertex)
@@ -87,6 +77,9 @@ def dfs(graph, current_vertex, target_vertex, visited=None):
 
 
 def bfs(graph, start_vertex, target_value):
+    """
+    A breadth-first search.
+    """
     path = [start_vertex]
     vertex_and_path = [start_vertex, path]
     bfs_queue = [vertex_and_path]
