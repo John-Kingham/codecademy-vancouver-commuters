@@ -20,3 +20,6 @@ For this project, we imagine that the Vancouver public metro system wants a prog
     - A breadth-first search will return the shortest route
   - Database:
     - All data will be stored in Python data structures (dictionaries, lists, etc.)
+
+## Progress
+I'm using GitHub Issues to track my tasks and progress on this project.
