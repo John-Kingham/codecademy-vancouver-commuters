@@ -23,3 +23,7 @@ For this project, we imagine that the Vancouver public metro system wants a prog
 
 ## Progress
 I'm using GitHub Issues to track my tasks and progress on this project.
+
+## Lessons
+1. Learned a little bit about GitHub Issues and Projects
+2. Found that writing a longer core function, with logical chunks of code (10-20 lines) summarised by a short comment, was more readable than breaking the function down into very short helper functions.
