@@ -93,3 +93,73 @@ def bfs(graph, start_vertex, target_value):
                     return path + [neighbour]
                 else:
                     bfs_queue.append([neighbour, path + [neighbour]])
+
+
+def skyroute():
+    """
+    Enables tourists to find the shortest metro route from one Vancouver
+    landmark to another.
+    """
+
+    print("\nHi there are welcome to SkyRoute!")
+    print("We'll help you find the shortest route between two Vancouver landmarks:")
+    quit = False
+    while not quit:
+
+        # show the list of start/end options and get valid input
+
+        landmark_list = ""
+        for letter, landmark in landmark_choices.items():
+            landmark_list += f"{letter} : {landmark}\n"
+        print("\nHere are the landmarks you can choose from:\n")
+        print(landmark_list)
+        start_letter = ""
+        while True:
+            start_letter = input(
+                "Where are you coming from? Please enter the corresponding letter: "
+            )
+            if start_letter in landmark_choices:
+                break
+            print("Sorry, your input was invalid.")
+        end_letter = ""
+        while True:
+            end_letter = input(
+                "Where are you going to? Please enter the corresponding letter: "
+            )
+            if end_letter not in landmark_choices:
+                print("Sorry, your input was invalid. Please try again.")
+            elif end_letter == start_letter:
+                print(
+                    "Sorry, your start and end choices were the same. Please choose again."
+                )
+            else:
+                break
+
+        # find the shortest route (if there is one) and display to user
+
+        start_landmark = landmark_choices[start_letter]
+        end_landmark = landmark_choices[end_letter]
+        route = shortest_route(start_landmark, end_landmark)
+        if route:
+            route_string = "\n".join(route)
+            print(
+                f"\nThe shortest metro route from {start_landmark} to {end_landmark} is: \n"
+            )
+            print(route_string)
+        else:
+            print(
+                f"Unfortunately, there is currently no metro route from {start_landmark} to {end_landmark}."
+            )
+
+        # ask the user if they want to choose again, or say goodbye
+
+        again = input(
+            "\nWould you like to make another choice? Enter y (yes) or n (no): "
+        )
+        if again == "n":
+            print("\nThank you for using SkyRoute. Have a nice day!")
+            quit = True
+
+
+if __name__ == "__main__":
+    skyroute()
